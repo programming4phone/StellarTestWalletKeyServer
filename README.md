@@ -6,6 +6,11 @@ This project demonstrates how to securely store the public key / secret seed ass
  
 The public key is stored as a hash and the secret seed is stored as encrytpted ciphertext. Neither key is _ever_ exposed as plaintext. Each web service invocation requires an Authorization header containing a Google Authentication token. The token is verified with Google Authentication Services before allowing any of the web services to begin processing.
 
+Web services implement the following functions:
+- **store keys** -  Store the account keys associated with a specific Stellar account.
+- **get keys** - Retrieve the account keys associated with a specific Stellar account.
+- **remove keys** - Remove the account keys associated with a specific Stellar account.
+
 See also the [Stellar Test Wallet Angular App](https://github.com/programming4phone/StellarTestWalletNgApp "Stellar Test Wallet Angular App").
 
 For further details about Stellar accounts see <https://www.stellar.org/developers/guides/get-started/create-account.html>.
