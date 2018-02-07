@@ -32,7 +32,7 @@ public class KeyDao {
 	
 	/**
 	 * Save an account to the Redis database. The key is set to PERSIST so that it never expires.
-	 * @param accountKeys AccountKeys
+	 * @param walletKeys WalletKeys
 	 * @throws com.programming4phone.stellar.wallet.api.error.InvalidKeyException
 	 */
 	public void saveAccount(WalletKeys walletKeys) {
@@ -49,7 +49,7 @@ public class KeyDao {
 	 * Retrieve the secret seed for an account number. An exception is thrown
 	 * if the key does not exist, ultimately resulting in an Http Status code 404 (NOT_FOUND).
 	 * @param accountNumber String
-	 * @return AccountKeys containing account number and secret seed
+	 * @return <b>WalletKeys</b> containing account number and secret seed
 	 * @throws com.programming4phone.stellar.wallet.api.error.KeyNotFoundException
 	 */
 	public WalletKeys getSecretSeed(String accountNumber) {

@@ -37,14 +37,20 @@ public class Application {
 		return cf;
 	}
 	
-	/*
-	 * 
+	/**
+	 * Create a StringRedisTemplate for the specific RedisConnectionFactory.
+	 * @param cf RedisConnectionFactory
+	 * @return StringRedisTemplate
 	 */
 	@Bean
 	public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory cf) {
 		return new StringRedisTemplate(cf);
 	}
 	
+	/**
+	 * Create a RestTemplate.
+	 * @return RestTemplate
+	 */
 	@Bean
 	public RestTemplate restTemplate() {
 		return new RestTemplate();

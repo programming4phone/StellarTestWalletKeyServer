@@ -1,6 +1,14 @@
 # Stellar Test Wallet Key Server 
 
-This is currently a work in progress.
+*This is currently a work in progress.*
+
+This project demonstrates how to securely store the public key / secret seed associated with a Stellar account.  
+ 
+The public key is stored as a hash and the secret seed is stored as encrytpted ciphertext. Neither key is _ever_ exposed as plaintext. Each web service invocation requires an Authorization header containing a Google Authentication token. The token is verified with Google Authentication Services before allowing any of the web services to begin processing.
+
+See also the [Stellar Test Wallet Angular App](https://github.com/programming4phone/StellarTestWalletNgApp "Stellar Test Wallet Angular App").
+
+For further details about Stellar accounts see <https://www.stellar.org/developers/guides/get-started/create-account.html>.
 
 ## Development stack
 

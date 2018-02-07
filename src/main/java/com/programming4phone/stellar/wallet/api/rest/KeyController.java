@@ -35,6 +35,15 @@ public class KeyController {
 	@Autowired
 	private TokenVerifier tokenVerifier;
 	
+	/**
+	 * Retrieve the account keys associated with a specific account number from the Redis database.  
+	 * If the account key is not found in the database, this web service will return HTTP status code  
+	 * 404 (NOT_FOUND). If the Google authentication token provided in the Authorization request header
+	 * cannot be verified, this web service will return HTTP status code 401 (UNAUTHORIZED).
+	 * @param authHeader HTTP Authorization request header (Bearer + Google authentication token)
+	 * @param accountNumber Stellar account number (hashed public key)
+	 * @return <b>WalletKeys</b> object containing hashed public key and encrypted private key
+	 */
 	@RequestMapping(value="/{accountNumber}", method=RequestMethod.GET, produces="application/json")
 	public WalletKeys getAccountKeys(@RequestHeader("Authorization") String authHeader, @PathVariable String accountNumber) {
 		tokenVerifier.verify(authHeader);
@@ -42,6 +51,14 @@ public class KeyController {
 		return keyDao.getSecretSeed(accountNumber);
 	}
 
+	/**
+	 * Store the account keys associated with a specific account number into the Redis database.  
+	 * If either of the account keys is invalid, this web service will return HTTP status code  
+	 * 400 (BAD_REQUEST). If the Google authentication token provided in the Authorization request header
+	 * cannot be verified, this web service will return HTTP status code 401 (UNAUTHORIZED).
+	 * @param authHeader HTTP Authorization request header (Bearer + Google authentication token)
+	 * @param walletKeys Object containing hashed public key and encrypted private key
+	 */
 	@RequestMapping(method=RequestMethod.PUT, consumes="application/json")
 	@ResponseStatus(HttpStatus.CREATED)
 	public void saveAccount(@RequestHeader("Authorization") String authHeader, @RequestBody WalletKeys walletKeys) {
@@ -50,6 +67,13 @@ public class KeyController {
 		keyDao.saveAccount(walletKeys);
 	}
 	
+	/**
+	 * Remove the account keys associated with a specific account number from the Redis database.  
+	 * If the Google authentication token provided in the Authorization request header
+	 * cannot be verified, this web service will return HTTP status code 401 (UNAUTHORIZED).
+	 * @param authHeader HTTP Authorization request header (Bearer + Google authentication token)
+	 * @param accountNumber Stellar account number (hashed public key)
+	 */
 	@RequestMapping(value="/delete/{accountNumber}", method=RequestMethod.DELETE)
 	public void removeAccount(@RequestHeader("Authorization") String authHeader, @PathVariable String accountNumber) {
 		tokenVerifier.verify(authHeader);
@@ -57,21 +81,33 @@ public class KeyController {
 		keyDao.removeAccount(accountNumber);
 	}
 	
+	/**
+	 * Exception handler that converts KeyNotFoundException to HTTP status 404 (NOT_FOUND)
+	 */
 	@ExceptionHandler(KeyNotFoundException.class)
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public void noAccountFound() {
 	}
 	
+	/**
+	 * Exception handler that converts InvalidKeyException to HTTP status 400 (BAD_REQUEST)
+	 */
 	@ExceptionHandler(InvalidKeyException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public void invalidKey() {
 	}
 	
+	/**
+	 * Exception handler that converts TokenMissingException to HTTP status 400 (BAD_REQUEST)
+	 */
 	@ExceptionHandler(TokenMissingException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public void tokenMissing() {
 	}
 	
+	/**
+	 * Exception handler that converts TokenVerificationException to HTTP status 401 (UNAUTHORIZED)
+	 */
 	@ExceptionHandler(TokenVerificationException.class)
 	@ResponseStatus(HttpStatus.UNAUTHORIZED)
 	public void tokenNotVerified() {
