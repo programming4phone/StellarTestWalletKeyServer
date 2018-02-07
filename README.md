@@ -11,7 +11,7 @@ Web services implement the following functions:
 - **get keys** - Retrieve the account keys associated with a specific Stellar account.
 - **remove keys** - Remove the account keys associated with a specific Stellar account.
 
-See also the [Stellar Test Wallet Angular App](https://github.com/programming4phone/StellarTestWalletNgApp "Stellar Test Wallet Angular App").
+Also see the [Stellar Test Wallet Angular App](https://github.com/programming4phone/StellarTestWalletNgApp "Stellar Test Wallet Angular App") project.
 
 For further details about Stellar accounts see <https://www.stellar.org/developers/guides/get-started/create-account.html>.
 
