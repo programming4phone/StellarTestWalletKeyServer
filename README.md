@@ -10,6 +10,8 @@ See also the [Stellar Test Wallet Angular App](https://github.com/programming4ph
 
 For further details about Stellar accounts see <https://www.stellar.org/developers/guides/get-started/create-account.html>.
 
+For further details about Google Authentication Services see <https://developers.google.com/identity/sign-in/web/sign-in>.
+
 ## Development stack
 
 This project was developed using Java 8, Spring Boot, Spring Data Redis, Eclipse Oxygen, and Maven. 
