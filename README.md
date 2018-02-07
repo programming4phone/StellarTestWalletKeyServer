@@ -1,6 +1,6 @@
 # Stellar Test Wallet Key Server 
 
-*This is currently a work in progress.*
+**This project is currently a work in progress.**
 
 This project demonstrates how to securely store the public key / secret seed associated with a Stellar account.  
  
